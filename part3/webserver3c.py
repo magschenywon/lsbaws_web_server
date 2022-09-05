@@ -55,3 +55,10 @@ def serve_forever():
 
 if __name__ == '__main__':
     serve_forever()
+
+    
+# 1.The simplest way to write a concurrent server in Unix is to use the fork() system call
+# 2.When a process forks a new process it becomes a parent process to that newly forked child process.
+# 3.Parent and child share the same file descriptors after the call to fork.
+# 4.The kernel uses descriptor reference counts to decide whether to close the file/socket or not
+# 5.The role of a server parent process: all it does now is accept a new connection from a client, fork a child to handle the client request, and loop over to accept a new client connection.
