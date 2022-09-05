@@ -67,3 +67,12 @@ if __name__ == '__main__':
 # The server child process exited, but the client socket was not closed by the kernel because the reference count for that socket descriptor was not 0
 # Then, the termination packet (called FIN in TCP/IP parlance) was not sent to the client and the client stayed on the line
 # If your long-running server doesn’t close duplicate file descriptors, it will eventually run out of available file descriptors
+
+
+
+#takeaways:
+# 1.If you don’t close duplicate descriptors, the clients won’t terminate because the client connections won’t get closed.
+# 2.If you don’t close duplicate descriptors, your long-running server will eventually run out of available file descriptors (max open files).
+# 3.When you fork a child process and it exits and the parent process doesn’t wait for it and doesn’t collect its termination status, it becomes a zombie.
+# 4.Zombies need to eat something and, in our case, it’s memory. Your server will eventually run out of available processes (max user processes) if it doesn’t take care of zombies.
+# 5.You can’t kill a zombie, you need to wait for it.
